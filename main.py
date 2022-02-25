@@ -24,6 +24,6 @@ class Analyse(Resource):
         return {'data': 'salut'}, 200
 
 
-api.add_resource(Analyse, '/test')
+api.add_resource(test, '/test')
 if __name__ == '__main__':
     app.run()  # run our Flask app
