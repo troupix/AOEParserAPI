@@ -1,5 +1,3 @@
+django
 gunicorn
-flask
-flask_restful
-pandas
-mgz
+django-heroku
