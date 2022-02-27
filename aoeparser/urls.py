@@ -19,4 +19,5 @@ urlpatterns = [
     path("db/", hello.views.db, name="db"),
     path("admin/", admin.site.urls),
     path("handlefile/", hello.views.handlefile),
+    path("getInputs/", hello.views.getInputs),
 ]
