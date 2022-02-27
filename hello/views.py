@@ -44,6 +44,20 @@ def getInputs(request):
         return HttpResponseRedirect('/')
 
 
+def getActions(request):
+    if request.method == 'POST':
+        if len(request.FILES) == 1:
+            jsondata = handle_uploaded_file(request.FILES['file'])
+            resdata = jsondata.actions
+            res = HttpResponse(
+                resdata, {'Content-Type': 'application/json'}, 200)
+            return res
+        else:
+            return HttpResponseRedirect('/')
+    else:
+        return HttpResponseRedirect('/')
+
+
 @csrf_protect
 def index(request):
     return render(request, 'index.html')
