@@ -1,3 +1,4 @@
+from xml.dom.minidom import TypeInfo
 from .models import Greeting
 from django.shortcuts import redirect, render
 from django.http import HttpResponse, HttpResponseRedirect
@@ -10,6 +11,7 @@ from mgz.model import parse_match, serialize
 
 def handle_uploaded_file(f):
     match = parse_match(f)
+    print(type(match))
     return match
 
 
@@ -20,6 +22,21 @@ def handlefile(request):
             jsondata = handle_uploaded_file(request.FILES['file'])
             res = HttpResponse(
                 jsondata, {'Content-Type': 'application/json'}, 200)
+            return res
+        else:
+            return HttpResponseRedirect('/')
+    else:
+        return HttpResponseRedirect('/')
+
+
+@csrf_exempt
+def getInputs(request):
+    if request.method == 'POST':
+        if len(request.FILES) == 1:
+            jsondata = handle_uploaded_file(request.FILES['file'])
+            resdata = jsondata.inputs
+            res = HttpResponse(
+                resdata, {'Content-Type': 'application/json'}, 200)
             return res
         else:
             return HttpResponseRedirect('/')
